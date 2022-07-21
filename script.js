@@ -12,13 +12,14 @@ const animeQts = async function (CName) {
       `https://animechan.vercel.app/api/quotes/character?name=${CName}`
     );
     if (!UrlData.ok) throw new Error('Character not found');
-    const [quoteData] = await UrlData.json();
-    console.log(quoteData);
+    const quoteData = await UrlData.json();
+    const RQuoteData = quoteData[Math.floor(Math.random() * 10)];
+    console.log(RQuoteData);
     const HTML = `<article class="quote">
       <div class="quote__data">
-        <h3 class="character-name">${quoteData.character}</h3>
-        <h4 class="character-anime">${quoteData.anime}</h4>
-        <p class="character-quote">${quoteData.quote}</p>
+        <h3 class="character-name">${RQuoteData.character}</h3>
+        <h4 class="character-anime">${RQuoteData.anime}</h4>
+        <p class="character-quote">${RQuoteData.quote}</p>
       </div>
     </article>`;
     quotesContainer.insertAdjacentHTML('beforeend', HTML);
